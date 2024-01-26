@@ -31,7 +31,6 @@ loader.load(
     // Set object color
 		scene.add( object );
     animals.push(object);
-    console.log(object);
 	},
 	// called when loading is in progresses
 	function ( xhr ) {
@@ -113,11 +112,7 @@ const groundColor = 0x8B4513; // Brown color
 const groundGeometry = new THREE.PlaneGeometry(1000, 1000, 50, 50);
 // Manipulate the vertices to create bumps and hills
 const vertices = groundGeometry.attributes.position.array;
-console.log(vertices.length);
-// for (let i = 0; i < vertices.length; i += 3) {
-//   const amplitude = 3; // Adjust the height of the bumps
-//   vertices[i + 2] = Math.random() * amplitude;
-// }
+
 groundGeometry.computeVertexNormals();
 
 const groundMaterial = new THREE.MeshStandardMaterial({ color: groundColor });
@@ -141,7 +136,8 @@ for (let i = 0; i < 40; i++) {
       add_animal(scene, "./models/deer.obj", 0.005);
       break;
     case 3:
-      add_animal(scene, "./models/cow.obj", 0.005);
+console.log(vertices.length);
+add_animal(scene, "./models/cow.obj", 0.005);
       break;
 
   
@@ -156,12 +152,13 @@ var loader = new THREE.TextureLoader();
 
 // Replace these paths with the actual paths to your face images
 var textures = [
-    loader.load('./assets/tamir.jpg'),
-    loader.load('./assets/tamir.jpg'),
-    loader.load('./assets/tamir.jpg'),
-    loader.load('./assets/tamir.jpg'),
-    loader.load('./assets/tamir.jpg'),
-    loader.load('./assets/tamir.jpg')
+    //SORRY :)
+    loader.load('./tamir.jpg'),
+    loader.load('./tamir.jpg'),
+    loader.load('./tamir.jpg'),
+    loader.load('./tamir.jpg'),
+    loader.load('./tamir.jpg'),
+    loader.load('./tamir.jpg')
 ];
 
 var materials = textures.map(texture => new THREE.MeshBasicMaterial({ map: texture }));
@@ -189,8 +186,6 @@ let index = 0;
 function rotate_animal(animal) {
   const direction = new THREE.Vector3();
   // Generate a random direction for the movement
-  console.log("Moving animal");
-  console.log(animal);
   direction.x = (Math.random() - 0.5) * 2;
   direction.z = (Math.random() - 0.5) * 2;  
   animal.rotation.y = Math.atan2(direction.x, direction.z); // Rotate the animal to face the direction
