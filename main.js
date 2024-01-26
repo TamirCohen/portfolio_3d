@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 
 const scene = new THREE.Scene()
 
@@ -10,6 +11,38 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
 })
+
+let animals = [];
+function add_animal(scene, obj_path, scale) {
+// instantiate a loader
+const loader = new OBJLoader();
+// load a resource
+loader.load(
+	// resource URL
+	obj_path,
+	// called when resource is loaded
+	function ( object ) {
+    object.scale.set(scale, scale, scale);
+    // Set object color
+		scene.add( object );
+    animals.push(object);
+    console.log("Animal loaded");
+	},
+	// called when loading is in progresses
+	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+		console.log( error );
+
+	}
+);
+}
 
 function addTree(scene) {
   // Create trunk
@@ -91,19 +124,58 @@ ground.rotation.x = -Math.PI / 2; // Rotate the ground to be horizontal
 scene.add(ground);
 
 addTree(scene);
-
+add_animal(scene, "models/wolf.obj", 0.03);
+add_animal(scene, "models/wolf.obj", 0.03);
+add_animal(scene, "models/wolf.obj", 0.03);
+add_animal(scene, "models/wolf.obj", 0.03);
+add_animal(scene, "models/wolf.obj", 0.03);
+add_animal(scene, "models/wolf.obj", 0.03);
+add_animal(scene, "models/wolf.obj", 0.03);
+add_animal(scene, "models/goat.obj", 0.01);
+// add_animal(scene, "models/lion.obj", 0.1);
+add_animal(scene, "models/cow.obj", 0.005);
+add_animal(scene, "models/deer.obj", 0.005);
 
 // Choose 50 location to create the trees, and add them to the scene
-for (let i = 0; i < 60; i++) {
+for (let i = 0; i < 100; i++) {
   addTree(scene);
+}
+
+const moving_period = 14;
+let index = 0;
+
+function rotate_animal(animal) {
+  const direction = new THREE.Vector3();
+  // Generate a random direction for the movement
+  console.log("Moving animal");
+  console.log(animal);
+  direction.x = (Math.random() - 0.5) * 2;
+  direction.z = (Math.random() - 0.5) * 2;  
+  animal.rotation.y = Math.atan2(direction.x, direction.z); // Rotate the animal to face the direction
+}
+
+function move_animal(animal, distance = 0.5) {
+  // Get animal direction and move it
+  const direction = new THREE.Vector3();
+
+  var angle = animal.rotation.y;
+  var newX = animal.position.x + distance * Math.sin(angle);
+  var newZ = animal.position.z + distance * Math.cos(angle);
+  animal.position.set(newX, 0, newZ);
 }
 
 
 function animate() {
+  index++;
   requestAnimationFrame(animate)
-  // torus.rotation.x += 0.01
-  // torus.rotation.z += 0.01
   controls.update()
+  for (let i = 0; i < animals.length; i++) {
+    if (index % moving_period == 0) {
+      rotate_animal(animals[i]);
+    }
+    move_animal(animals[i]);
+  }
+
   renderer.render(scene, camera)
 }
 animate()
