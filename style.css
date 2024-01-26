@@ -1,11 +1,5 @@
 @import url("https://use.typekit.net/jmk3xov.css");
 
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
 
 :root {
   --dark-bg: rgba(15, 15, 15, 0.95);
@@ -53,6 +47,7 @@ canvas {
     
   }
 
+  
   section {
     grid-column: 2 / 8;
     padding: 1rem;
@@ -61,6 +56,27 @@ canvas {
     line-height: 1.5;
     margin-bottom: var(--spacing);
   }
+
+  .left {
+    grid-column: 6 / 12;
+  }
+
+  /* This rule will apply when the screen width is 600px or less */
+@media (max-width: 600px) {
+  header {
+    font-size: 1.5rem; /* Adjust this value to your liking */
+    padding: 1rem; /* Adjust this value to your liking */
+    grid-column: 2 / span 10;
+  }
+  section {
+    font-size: 1rem; /* Adjust this value to your liking */
+    padding: 1rem; /* Adjust this value to your liking */
+    grid-column: 2 / span 10;
+  }
+  .left {
+    grid-column: 3 / 12;
+  }
+}
 
   blockquote {
     margin: 0;
@@ -75,8 +91,4 @@ canvas {
     font-size: 4rem;
     display: inline;
     line-height: 1;
-  }
-
-  .left {
-    grid-column: 6 / 12;
   }
