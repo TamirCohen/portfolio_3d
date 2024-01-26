@@ -211,11 +211,13 @@ function moveCamera() {
 
   camera.position.z = t * -0.02;
   camera.position.x = t * -0.0004;
+  camera.position.y = 4 + t * -0.008;
   camera.rotation.y = t * -0.0002;
 
 
   cube.position.x = camera.position.x + -Math.sin(camera.rotation.y - 0.5) * 10;
   cube.position.z = camera.position.z + -Math.cos(camera.rotation.y - 0.5) * 10;
+  cube.position.y = camera.position.y;
   cube.rotation.y = t * -0.0006;
 
 
