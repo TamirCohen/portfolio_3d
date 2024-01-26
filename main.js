@@ -209,15 +209,14 @@ function move_animal(animal, distance = 0.5) {
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
 
-  camera.position.z = t * -0.01;
-  camera.position.x = t * -0.0002;
-  camera.rotation.y = t * -0.0001;
+  camera.position.z = t * -0.02;
+  camera.position.x = t * -0.0004;
+  camera.rotation.y = t * -0.0002;
 
 
-  // I want my cube to be always on the screen - FIX it
-  cube.position.z = -10 + t * -0.01;
-  cube.position.x = 7 + t * -0.0001;
-  cube.rotation.y = t * -0.0003;
+  cube.position.x = camera.position.x + -Math.sin(camera.rotation.y - 0.5) * 10;
+  cube.position.z = camera.position.z + -Math.cos(camera.rotation.y - 0.5) * 10;
+  cube.rotation.y = t * -0.0006;
 
 
 

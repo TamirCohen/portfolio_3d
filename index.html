@@ -7,7 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite App</title>
 </head>
-
+<style>
+  /* Add CSS styling for the indented paragraph */
+  .indented {
+    text-indent: 20px; /* You can adjust the value according to your preference */
+  }
+</style>
 <body>
   <!-- <div id="app"></div> -->
   <canvas id="bg"></canvas>
@@ -15,103 +20,77 @@
 
     <header>
       <h1>Tamir Cohen</h1>
-      <p>🚀 Welcome to my website!</p>
+      <p>Software Engineer 💻🚀</p>
     </header>
 
-
-    <blockquote>
-      <p>I like making stuff and putting it on the internet</p>
-    </blockquote>
-
     <section>
-      <h2>📜 Manifesto</h2>
+      <h2>👨 About Me</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
+        My name is Tamir Cohen Iam <span id="age"></span> years old.
       </p>
-
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
+        I am a Software Engineer, I love to code 💻 and learn new things.
       </p>
-
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
+        I live in Tel Aviv in 🇮🇱
       </p>
+      <script>
+        const birthYear = 1999; // replace with the actual birth year
+      
+        const currentYear = new Date().getFullYear();
+      
+        const age = currentYear - birthYear;
+      
+        const ageElement = document.getElementById('age');
+      
+        ageElement.textContent = age;
+      </script>
 
+    </section>
+
+    <section class="left">
+      <h2>🙆‍♂️ Stuff I like to do</h2>
+
+        <p>
+          I'm a Low level programmer 🐧 and python developer 🐍. 
+        </p>
+        <p>
+          I also like to do some web development 🌐, and Computer Vision stuff.
+        </p>
+        <p>
+          I love to swim 🏊‍♂️ baking bread 🍞 and hike abroad 🏕.
+        </p>
     </section>
 
     <section class="light">
-      <h2>👩🏽‍🚀 Projects</h2>
+      <h2>👨‍💻 Work Experience </h2>
 
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
-      </p>
-
-      <h2>🏆 Accomplishments</h2>
-
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
-      </p>
-
+        <p>
+          Software Engineer at IDF (2022 - Present)
+        </p>
+        <p class="indented">Linux Kernel 🐧 and python 🐍 </p>
+        <p>
+          Embedded Software Engineer at IDF (2019 - 2022)
+        </p>
+        <p class="indented">C and reverse engineering 🤖</p>
     </section>
-
-    <blockquote>
-      <p>The best way out is always through <br>-Robert Frost</p>
-    </blockquote>
 
     <section class="left">
-      <h2>🌮 Work History</h2>
+      <h2>🧑‍🎓 education</h2>
 
-      <h3>McDonalds</h3>
+      <h3>Tel Aviv University - MEng electrical engineering</h3>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
+        Specializing in deep learning 🤖
       </p>
-      <h3>Burger King</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
-      </p>
-      <h3>Taco Bell</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
-      </p>
+      <h3>Tel Aviv University - BSc physics ⚛️</h3>
 
     </section>
 
-    <blockquote>
-      <p>Thanks for watching!</p>
-    </blockquote>
+    <section class="right">
+      <h2>☎️ Contact Me</h2>
 
+      <h3>tamircohen14@gmail.com</h3>
+    </section>
 
   </main>
   <script type="module" src="/main.js"></script>
