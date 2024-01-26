@@ -31,7 +31,7 @@ loader.load(
     // Set object color
 		scene.add( object );
     animals.push(object);
-    console.log("Animal loaded");
+    console.log(object);
 	},
 	// called when loading is in progresses
 	function ( xhr ) {
@@ -152,6 +152,37 @@ for (let i = 0; i < 1000; i++) {
   addTree(scene);
 }
 
+var loader = new THREE.TextureLoader();
+
+// Replace these paths with the actual paths to your face images
+var textures = [
+    loader.load('assets/tamir.jpg'),
+    loader.load('assets/tamir.jpg'),
+    loader.load('assets/tamir.jpg'),
+    loader.load('assets/tamir.jpg'),
+    loader.load('assets/tamir.jpg'),
+    loader.load('assets/tamir.jpg')
+];
+
+var materials = textures.map(texture => new THREE.MeshBasicMaterial({ map: texture }));
+var cube = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 5), materials);
+cube.position.set(7, 5, -13);
+scene.add(cube);
+
+
+// var loader = new THREE.TextureLoader();
+// const geometry = new THREE.SphereGeometry( 5, 32, 16 ); 
+// var texture = loader.load('assets/tamir.jpg'); // Replace with the path to your face image
+// var material = new THREE.MeshBasicMaterial({ map: texture });
+
+// const sphere = new THREE.Mesh( geometry, material ); 
+// sphere.rotation.y = 4.2;
+// scene.add( sphere );
+
+// Add texture to the sphere object
+
+
+
 const moving_period = 14;
 let index = 0;
 
@@ -180,7 +211,16 @@ function moveCamera() {
 
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
-  camera.rotation.y = t * -0.0002;
+  camera.rotation.y = t * -0.0001;
+
+
+  // I want my cube to be always on the screen - FIX it
+  cube.position.z = -10 + t * -0.01;
+  cube.position.x = 7 + t * -0.0001;
+  cube.rotation.y = t * -0.0003;
+
+
+
 }
 
 document.body.onscroll = moveCamera;
