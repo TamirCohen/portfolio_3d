@@ -132,16 +132,16 @@ for (let i = 0; i < 40; i++) {
   const animal = Math.floor(Math.random() * 4);
   switch (animal) {
     case 0:
-      add_animal(scene, "models/wolf.obj", 0.03);
+      add_animal(scene, "./models/wolf.obj", 0.03);
       break;
     case 1:
-      add_animal(scene, "models/goat.obj", 0.01);
+      add_animal(scene, "./models/goat.obj", 0.01);
       break;
     case 2:
-      add_animal(scene, "models/deer.obj", 0.005);
+      add_animal(scene, "./models/deer.obj", 0.005);
       break;
     case 3:
-      add_animal(scene, "models/cow.obj", 0.005);
+      add_animal(scene, "./models/cow.obj", 0.005);
       break;
 
   
@@ -156,12 +156,12 @@ var loader = new THREE.TextureLoader();
 
 // Replace these paths with the actual paths to your face images
 var textures = [
-    loader.load('assets/tamir.jpg'),
-    loader.load('assets/tamir.jpg'),
-    loader.load('assets/tamir.jpg'),
-    loader.load('assets/tamir.jpg'),
-    loader.load('assets/tamir.jpg'),
-    loader.load('assets/tamir.jpg')
+    loader.load('./assets/tamir.jpg'),
+    loader.load('./assets/tamir.jpg'),
+    loader.load('./assets/tamir.jpg'),
+    loader.load('./assets/tamir.jpg'),
+    loader.load('./assets/tamir.jpg'),
+    loader.load('./assets/tamir.jpg')
 ];
 
 var materials = textures.map(texture => new THREE.MeshBasicMaterial({ map: texture }));
