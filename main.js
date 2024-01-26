@@ -1,7 +1,7 @@
 import './style.css'
 import * as THREE from 'three'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 
 const scene = new THREE.Scene()
@@ -23,6 +23,11 @@ loader.load(
 	// called when resource is loaded
 	function ( object ) {
     object.scale.set(scale, scale, scale);
+    // Set random position
+    const range = 80;
+    const x = Math.random() * range - range / 2;
+    const z = Math.random() * range - range / 2;
+    object.position.set(x, 0, z);
     // Set object color
 		scene.add( object );
     animals.push(object);
@@ -64,7 +69,7 @@ function addTree(scene) {
   tree.add(leaves);
 
   // Position tree at a random location
-  const range = 100;
+  const range = 300;
   const x = Math.random() * range - range / 2;
   const z = Math.random() * range - range / 2;
   tree.position.set(x, 5, z);
@@ -75,7 +80,10 @@ function addTree(scene) {
 
 renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
-camera.position.setZ(50)
+camera.position.setZ(0)
+camera.position.setX(0)
+camera.position.setY(4)
+camera.rotation.x = 0.01
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
@@ -85,8 +93,6 @@ scene.background = new THREE.Color(0x0099cc);
 
 scene.add(directionalLight);
 // Visual representation of the light source
-const helper = new THREE.DirectionalLightHelper(directionalLight, 5);
-scene.add(helper);
 
 // Create a sphere that represents the sun
 const sunGeometry = new THREE.SphereGeometry(20, 32, 32);
@@ -100,10 +106,7 @@ sun.position.copy(directionalLight.position);
 scene.add(sun);
 
 
-const gridHelper = new THREE.GridHelper(200, 50)
-scene.add(gridHelper)
-
-const  controls = new OrbitControls(camera, renderer.domElement)
+// const  controls = new OrbitControls(camera, renderer.domElement)
 
 // Create the bottom of the ocean
 const groundColor = 0x8B4513; // Brown color
@@ -111,10 +114,10 @@ const groundGeometry = new THREE.PlaneGeometry(1000, 1000, 50, 50);
 // Manipulate the vertices to create bumps and hills
 const vertices = groundGeometry.attributes.position.array;
 console.log(vertices.length);
-for (let i = 0; i < vertices.length; i += 3) {
-  const amplitude = 3; // Adjust the height of the bumps
-  vertices[i + 2] = Math.random() * amplitude;
-}
+// for (let i = 0; i < vertices.length; i += 3) {
+//   const amplitude = 3; // Adjust the height of the bumps
+//   vertices[i + 2] = Math.random() * amplitude;
+// }
 groundGeometry.computeVertexNormals();
 
 const groundMaterial = new THREE.MeshStandardMaterial({ color: groundColor });
@@ -123,21 +126,29 @@ ground.rotation.x = -Math.PI / 2; // Rotate the ground to be horizontal
 
 scene.add(ground);
 
-addTree(scene);
-add_animal(scene, "models/wolf.obj", 0.03);
-add_animal(scene, "models/wolf.obj", 0.03);
-add_animal(scene, "models/wolf.obj", 0.03);
-add_animal(scene, "models/wolf.obj", 0.03);
-add_animal(scene, "models/wolf.obj", 0.03);
-add_animal(scene, "models/wolf.obj", 0.03);
-add_animal(scene, "models/wolf.obj", 0.03);
-add_animal(scene, "models/goat.obj", 0.01);
-// add_animal(scene, "models/lion.obj", 0.1);
-add_animal(scene, "models/cow.obj", 0.005);
-add_animal(scene, "models/deer.obj", 0.005);
+for (let i = 0; i < 40; i++) {
+  // add_animal(scene, "models/wolf.obj", 0.03);
+  // Choose random animal and add it to the scene (one of 4 options)
+  const animal = Math.floor(Math.random() * 4);
+  switch (animal) {
+    case 0:
+      add_animal(scene, "models/wolf.obj", 0.03);
+      break;
+    case 1:
+      add_animal(scene, "models/goat.obj", 0.01);
+      break;
+    case 2:
+      add_animal(scene, "models/deer.obj", 0.005);
+      break;
+    case 3:
+      add_animal(scene, "models/cow.obj", 0.005);
+      break;
+
+  
+}}
 
 // Choose 50 location to create the trees, and add them to the scene
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 1000; i++) {
   addTree(scene);
 }
 
@@ -164,11 +175,23 @@ function move_animal(animal, distance = 0.5) {
   animal.position.set(newX, 0, newZ);
 }
 
+function moveCamera() {
+  const t = document.body.getBoundingClientRect().top;
+
+  camera.position.z = t * -0.01;
+  camera.position.x = t * -0.0002;
+  camera.rotation.y = t * -0.0002;
+}
+
+document.body.onscroll = moveCamera;
+moveCamera();
+
+
 
 function animate() {
   index++;
   requestAnimationFrame(animate)
-  controls.update()
+  // controls.update()
   for (let i = 0; i < animals.length; i++) {
     if (index % moving_period == 0) {
       rotate_animal(animals[i]);
